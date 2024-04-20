@@ -1,8 +1,16 @@
 # Spark Cluster
 Run Spark in cluster mode locally using docker containers.
 
+### Containers
+- spark-master
+- spark-worker-1
+- spark-worker-2
+- spark-worker-3
+- spark-history
+
+
 ### Commands
-|               Command               |           Use           |
+|               Command               |           For           |
 |:-----------------------------------:|:-----------------------:|
 |            `make build`             |    For initial setup    |
 |              `make up`              |  Start all containers   |
@@ -12,7 +20,7 @@ Run Spark in cluster mode locally using docker containers.
 
 
 ### URLs
-|          URL           |   Use    |
+|          URL           |   For    |
 |:----------------------:|:--------:|
 | http://localhost:4040  | Spark UI |
 | http://localhost:9090  |  Master  |
