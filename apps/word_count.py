@@ -1,7 +1,10 @@
 import time
 import sys
 
+from pyspark import StorageLevel
 from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StringType, StructField
+
 
 spark = SparkSession.builder.appName(
     "Word Count test"
@@ -12,19 +15,27 @@ spark = SparkSession.builder.appName(
 ).getOrCreate()
 sc = spark.sparkContext
 
-# A=2, B=1, C=5, D=2, E=2
 rdd = sc.textFile("./data/names.txt", 6)
-df = rdd.map(lambda name: (name[0], name)).toDF()
+df = rdd.map(lambda name: (name[0], name)).toDF(
+    schema=StructType([
+        StructField("letter", StringType(), True),
+        StructField("name", StringType(), True),
+    ])
+)
 
-df.collect()
+# So that the df is not recomputed everytime we use foreachPartition for testing purposes
+df.persist(storageLevel=StorageLevel.MEMORY_ONLY)
 df.foreachPartition(lambda rows: print_partition(rows))
 
 rdd = df.rdd.groupByKey(numPartitions=6)
+rdd.cache()
+
 rdd.foreachPartition(lambda rows: print_partition_2(rows))
 
 rdd = rdd.mapValues(lambda names: len(set(names)))
-rdd.collect()
+rdd.collect()  # A=2, B=1, C=5, D=2, E=2
 
+# To keep sparkSession alive for just a bit longer in order to check spark UI at 4040 port.
 time.sleep(60)
 
 # from operator import add
