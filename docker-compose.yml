@@ -34,7 +34,7 @@ services:
       - SPARK_NO_DAEMONIZE=true
     volumes:
       - ./data:/opt/spark/data
-      - ./apss:/opt/spark/apps
+      - ./apps:/opt/spark/apps
       - spark-logs:/opt/spark/spark-events
     ports:
       - "8081:8081"
