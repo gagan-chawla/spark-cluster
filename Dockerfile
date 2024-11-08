@@ -1,6 +1,6 @@
 FROM python:3.11-bullseye
 
-ARG SPARK_VERSION=3.5.1
+ARG SPARK_VERSION=3.5.3
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
