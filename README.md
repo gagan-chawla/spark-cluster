@@ -10,13 +10,13 @@ Run Spark in cluster mode locally using docker containers.
 
 
 ### Commands
-|               Command               |           For           |
-|:-----------------------------------:|:-----------------------:|
-|            `make build`             |    For initial setup    |
-|              `make up`              |  Start all containers   |
-|             `make down`             |   Stop all containers   |
-| `make shell container=spark-master` | Open spark-master shell |
-|   `make submit app=word_count.py`   |   Submit app to spark   |
+|               Command                               |           For           |
+|:---------------------------------------------------:|:-----------------------:|
+|            `make build`                             |    For initial setup    |
+|              `make up`                              |  Start all containers   |
+|             `make down`                             |   Stop all containers   |
+| `make shell container=spark-master`                 | Open spark-master shell |
+|   `make submit app=apps/word_count/word_count.py`   |   Submit app to spark   |
 
 
 ### URLs
