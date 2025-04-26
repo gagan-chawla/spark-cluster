@@ -6,7 +6,7 @@ from pyspark.sql.functions import col
 spark = SparkSession.builder.appName("Silent Schema Failure Test").getOrCreate()
 sc = spark.sparkContext
 
-rdd = sc.textFile("./data/numbers.txt")
+rdd = sc.textFile("./apps/silent_schema_failure/numbers.txt")
 df = rdd.toDF(schema=StringType())
 df.show()
 

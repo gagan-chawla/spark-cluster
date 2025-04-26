@@ -33,7 +33,7 @@ spark = SparkSession.builder.appName(
 ).getOrCreate()
 sc = spark.sparkContext
 
-rdd = sc.textFile("./data/names.txt", 6)
+rdd = sc.textFile("./apps/word_count/names.txt", 6)
 df = rdd.map(lambda name: (name[0], name)).toDF(
     schema=StructType([
         StructField("letter", StringType(), True),
@@ -51,10 +51,10 @@ rdd.cache()
 rdd.foreachPartition(lambda rows: print_partition_2(rows))
 
 rdd = rdd.mapValues(lambda names: len(set(names)))
-rdd.collect()  # A=2, B=1, C=5, D=2, E=2
+print(rdd.collect())  # A=2, B=1, C=5, D=2, E=2
 
 # To keep sparkSession alive for just a bit longer in order to check spark UI at 4040 port.
-time.sleep(60)
+# time.sleep(60)
 
 # from operator import add
 # rdd = sc.textFile("./data/names.txt", 6)
